@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using RPG_Game.Data;
 using RPG_Game.Services.CharacterService;
 using System.Reflection;
 
@@ -11,6 +13,8 @@ namespace RPG_Game
 
             // Add services to the container.
 
+            builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer
+            (builder.Configuration.GetConnectionString("Database")));
             builder.Services.AddControllers();
             
  
