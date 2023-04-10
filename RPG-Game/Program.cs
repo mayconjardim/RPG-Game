@@ -1,4 +1,5 @@
 using RPG_Game.Services.CharacterService;
+using System.Reflection;
 
 namespace RPG_Game
 {
@@ -16,7 +17,7 @@ namespace RPG_Game
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             builder.Services.AddScoped<ICharacterService, CharacterService>();
 
             var app = builder.Build();
