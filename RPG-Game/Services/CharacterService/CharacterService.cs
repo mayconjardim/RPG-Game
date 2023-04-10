@@ -38,10 +38,14 @@ namespace RPG_Game.Services.CharacterService
             return response;
         }
 
-        
         public async Task<ServiceResponse<List<GetCharacterDto>>> AddCharacter(AddCharacterDto newCharacter)
         {
-            return null;
+            var response = new ServiceResponse<List<GetCharacterDto>>();
+            Character character = _mapper.Map<Character>(newCharacter);
+            _context.Add(character);
+            await _context.SaveChangesAsync();
+            response.Data = await _context.Characters.Select(c => _mapper.Map<GetCharacterDto>(c)).ToListAsync();
+            return response;
         }
 
 
