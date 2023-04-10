@@ -11,10 +11,7 @@ namespace RPG_Game.Profiles
         
         CreateMap<Character, GetCharacterDto>();
         CreateMap<AddCharacterDto, Character>();
-
-
-
-
+        CreateMap<UpdateCharacterDto, Character>();
 
         }
     }
