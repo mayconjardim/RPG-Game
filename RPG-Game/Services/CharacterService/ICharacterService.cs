@@ -12,5 +12,6 @@ namespace RPG_Game.Services.CharacterService
 
         Task<ServiceResponse<List<GetCharacterDto>>> AddCharacter(AddCharacterDto newCharacter);
 
+        Task<ServiceResponse<GetCharacterDto>> UpdateCharacter
     } 
 }

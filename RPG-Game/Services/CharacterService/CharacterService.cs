@@ -1,4 +1,5 @@
-﻿using RPG_Game.Dtos.Character;
+﻿using AutoMapper;
+using RPG_Game.Dtos.Character;
 using RPG_Game.Models;
 
 namespace RPG_Game.Services.CharacterService
@@ -13,25 +14,38 @@ namespace RPG_Game.Services.CharacterService
 
             };
 
+        private readonly IMapper _mapper;
+
+        public CharacterService(IMapper mapper)
+        {
+            _mapper = mapper;
+        }
+
         public async Task<ServiceResponse<List<GetCharacterDto>>> AddCharacter(AddCharacterDto newCharacter)
         {
-            var serviceResponse = new ServiceResponse<List<Character>>();
-            characters.Add(newCharacter);
-            serviceResponse.Data = characters;
+            var serviceResponse = new ServiceResponse<List<GetCharacterDto>>();
+
+            Character character = _mapper.Map<Character>(newCharacter);
+            character.Id = characters.Max(c => c.Id) + 1;
+            characters.Add(character);
+            serviceResponse.Data = characters.Select(c => _mapper.Map<GetCharacterDto>(c)).ToList();
             return serviceResponse;
         }
 
         public async Task<ServiceResponse<List<GetCharacterDto>>> GetAllCharacters()
         {
-            return new ServiceResponse<List<GetCharacterDto>> { Data = characters };
-
+            return new ServiceResponse<List<GetCharacterDto>>
+            { 
+                Data = characters.Select(c => _mapper.Map<GetCharacterDto>(c)).ToList()
+            };
+       
         }
 
         public async Task<ServiceResponse<GetCharacterDto>> GetCharacterById(int id)
         {
             var serviceResponse = new ServiceResponse<GetCharacterDto>();
             var character = characters.FirstOrDefault(c => c.Id == id);
-            serviceResponse.Data = character;
+            serviceResponse.Data = _mapper.Map<GetCharacterDto>(character);
             return serviceResponse;
 
         }
