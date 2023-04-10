@@ -83,11 +83,27 @@ namespace RPG_Game.Services.CharacterService
 
         public async Task<ServiceResponse<List<GetCharacterDto>>> DeleteCharacter(int id)
         {
-            return null;
+            var response = new ServiceResponse<List<GetCharacterDto>>();
+            
+            try
+            {
+
+                Character character = await _context.Characters.FirstAsync(c => c.Id == id);
+                _context.Characters.Remove(character);
+
+                await _context.SaveChangesAsync();
+
+            } catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
+
+            return response;
 
         }
 
-      
+
     }
         
 }
