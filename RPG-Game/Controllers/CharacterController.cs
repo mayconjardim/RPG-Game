@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using RPG_Game.Dtos.Character;
 using RPG_Game.Models;
 using RPG_Game.Services.CharacterService;
+using System.Security.Claims;
 
 namespace RPG_Game.Controllers
 {
@@ -18,13 +19,16 @@ namespace RPG_Game.Controllers
         public CharacterController(ICharacterService characterService)
         {
             _characterService = characterService;
-        }  
+        }
 
-
+        
         [HttpGet]
-        public async Task<ActionResult<ServiceResponse<List<GetCharacterDto>>>> Get()
+        public async Task<ActionResult<ServiceResponse<List<GetCharacterDto>>>> GetAllCharacters()
         {
-            return Ok(await _characterService.GetAllCharacters());
+
+            int userId = int.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
+
+            return Ok(await _characterService.GetAllCharacters(userId));
         }
 
         [HttpGet("{id}")]
