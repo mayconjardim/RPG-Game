@@ -29,7 +29,19 @@ namespace RPG_Game.Controllers
             }
             return Ok(response);
 
+        }
 
+        [HttpPost("login")]
+        public async Task<ActionResult<ServiceResponse<string>>> Login(UserLoginDto login)
+        {
+
+            var response = await _authRepository.Login(login.UserName, login.Password);
+
+            if (!response.Success)
+            {
+                return BadRequest(response);
+            }
+            return Ok(response);
 
         }
 

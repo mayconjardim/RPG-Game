@@ -7,7 +7,7 @@ namespace RPG_Game.Data
 
         Task<ServiceResponse<int>> Register(User user, string password);
 
-        Task<ServiceResponse<string>> Login(User user, string password);
+        Task<ServiceResponse<string>> Login(string username, string password);
 
         Task<bool> UserExists(String username);
 
