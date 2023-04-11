@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RPG_Game.Dtos.Character;
 using RPG_Game.Models;
@@ -8,6 +9,7 @@ namespace RPG_Game.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CharacterController : ControllerBase
     {
 
