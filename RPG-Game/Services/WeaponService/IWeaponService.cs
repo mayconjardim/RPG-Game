@@ -7,7 +7,7 @@ namespace RPG_Game.Services.WeaponService
     public interface IWeaponService
     {
 
-        Task<ServiceResponse<GetCharacterDto>> AddWeapon(AddWeaponDto addWeapon);
+        Task<ServiceResponse<GetCharacterDto>> AddWeapon(AddWeaponDto newWeapon);
 
     }
 }
