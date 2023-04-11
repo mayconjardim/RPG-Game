@@ -11,5 +11,7 @@
 
         public Character Character { get; set; }
 
+        public int CharacterId { get; set; }
+
     }
 }
