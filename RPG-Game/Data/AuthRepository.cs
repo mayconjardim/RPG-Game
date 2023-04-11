@@ -46,7 +46,7 @@ namespace RPG_Game.Data
 
         public async Task<bool> UserExists(string username)
         {
-            if (await _context.Users.AnyAsync(u => u.Username.ToLower().Equals(username.ToLower()))
+            if (await _context.Users.AnyAsync(u => u.Username.ToLower().Equals(username.ToLower())))
             {
                 return true;
             }
