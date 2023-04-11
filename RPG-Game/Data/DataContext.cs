@@ -16,5 +16,8 @@ namespace RPG_Game.Data
 
         public DbSet<User> Users { get; set; }
 
+        public DbSet<Weapon> Weapons { get; set; }
+
+
     }
 }
