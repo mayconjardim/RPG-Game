@@ -10,6 +10,9 @@ namespace RPG_Game.Services.FightService
 
         Task<ServiceResponse<AttackResultDto>> SkillAttack(SkillAttackDto request);
 
+        Task<ServiceResponse<FightResultDto>> Fight(FightRequestDto request);
+
+
 
     }
 }
