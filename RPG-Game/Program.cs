@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using RPG_Game.Data;
 using RPG_Game.Services.CharacterService;
+using RPG_Game.Services.FightService;
 using RPG_Game.Services.WeaponService;
 using Swashbuckle.AspNetCore.Filters;
 using System.Reflection;
@@ -39,7 +40,9 @@ namespace RPG_Game
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             builder.Services.AddScoped<ICharacterService, CharacterService>();
             builder.Services.AddScoped<IWeaponService, WeaponService>();
+            builder.Services.AddScoped<IFightService, FightService>();
             builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+    
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
              .AddJwtBearer(options =>
              {
