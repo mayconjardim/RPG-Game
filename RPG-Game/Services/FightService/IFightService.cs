@@ -12,6 +12,7 @@ namespace RPG_Game.Services.FightService
 
         Task<ServiceResponse<FightResultDto>> Fight(FightRequestDto request);
 
+        Task<ServiceResponse<List<HighScoreDto>>> GetHighScore();
 
 
     }
