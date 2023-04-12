@@ -31,7 +31,8 @@ namespace RPG_Game.Services.CharacterService
         {
             var response = new ServiceResponse<List<GetCharacterDto>>();
 
-            var dbCharacters = await _context.Characters.Where(c => c.User.Id == GetUserId()).ToListAsync();
+            var dbCharacters = await _context.Characters.
+                Include(c => c.Skills).Where(c => c.User.Id == GetUserId()).ToListAsync();
 
             response.Data = dbCharacters.Select(c => _mapper.Map<GetCharacterDto>(c)).ToList();
 
@@ -41,8 +42,9 @@ namespace RPG_Game.Services.CharacterService
         public async Task<ServiceResponse<GetCharacterDto>> GetCharacterById(int id)
         {
             var response = new ServiceResponse<GetCharacterDto>();
-          
-            var dbCharacter = await _context.Characters.FirstOrDefaultAsync(c => c.Id == id && c.User.Id == GetUserId());
+
+            var dbCharacter = await _context.Characters.
+                Include(c => c.Skills).FirstOrDefaultAsync(c => c.Id == id && c.User.Id == GetUserId());
           
             response.Data = _mapper.Map<GetCharacterDto>(dbCharacter);
           
